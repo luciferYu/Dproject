@@ -54,9 +54,9 @@ ROOT_URLCONF = 'Dproject.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',#使用何种模板引擎
+        'DIRS': [os.path.join(BASE_DIR,'templates')],#指定模板的路径
+        'APP_DIRS': True,#是否进入已安装应用中查找模板. 每种模板引擎都定义了一个默认的名称作为搜索模板的子目录. 例如django为它自己的模板引擎指定的是 ‘templates’.
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

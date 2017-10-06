@@ -1,0 +1,60 @@
+h1,h2,h3,h4,h5,h6,p,body,ul,ol,dl,dd,dt,input{
+    /*去掉默认样式*/
+    margin: 0;
+    padding: 0;
+}
+
+input{
+    border: 0;
+}
+
+ul,ol{
+    /*去掉左边的点或者数字*/
+    list-style: none;
+}
+
+a{
+    /*去掉下划线*/
+    text-decoration: none;
+}
+
+a:hover{
+    color: red !important;
+}
+
+em,i{
+    /*去掉斜体*/
+    font-style: normal;
+}
+
+b,strong{
+    /*去掉加粗*/
+    font-weight: normal;
+}
+
+
+/*清除浮动影响 和清除margintop塌陷 合在一起的写法*/
+.clearfix:before,.clearfix:after{
+    content: "";
+    display: table;
+}
+
+.clearfix:after{
+    clear: both;
+}
+
+.clearfix{
+    /*兼容ie*/
+    zoom:1;
+}
+
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+
+
+
