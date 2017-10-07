@@ -6,9 +6,6 @@ from .models import *
 def index(request): #最简易视图
     #return HttpResponse('hello django!!')
     cags = NewsCategory.objects.all()
-    html = ''
-    for cag in cags:
-        html = html + '<li><a href="">' + cag.cag_name + '</a></li>'
-    data = {'title':'新闻首页','content':html}
-    return render(request,'index.html',data)
+    title = '新闻首页'
+    return render(request,'index.html',locals())
 

@@ -44,7 +44,9 @@
 </head>
 <body>
 <ul>
-  {{ content }}
+    {% for cag in cags %}
+      <li><h1><a href="">{{ cag.cag_name }}</a></h1></li>
+    {% endfor %}
 </ul>
 </body>
 </html>
