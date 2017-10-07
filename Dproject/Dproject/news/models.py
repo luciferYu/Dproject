@@ -42,6 +42,6 @@ class HeroInfo(BaseModel):
     hero_desc = models.TextField()  # 英雄的描述
     hero_delete = models.BooleanField(default=False)  # 英雄是否被逻辑删除
     hero_book = models.ForeignKey('BookInfo')  # 英雄属于的书
-    hero_hometown = models.CharField(max_length=70,default='金庸小说') # 英雄也要问出处
+    #hero_hometown = models.CharField(max_length=70,default='金庸小说') # 英雄也要问出处
     def __str__(self):
         return self.hero_name

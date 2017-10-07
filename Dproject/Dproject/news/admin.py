@@ -11,6 +11,13 @@ class NewsInfoAdmin(admin.ModelAdmin):
 class NewsCategoryAdmin(admin.ModelAdmin):
     list_display = ['id','cag_name'] #显示的内容
 
+@admin.register(HeroInfo)  #另一种注册方法使用装饰器注册
+class HeroInfoAdmin(admin.ModelAdmin):
+    list_display = ['hero_name','hero_desc']
+
+@admin.register(BookInfo)
+class BookInfoAdmin(admin.ModelAdmin):
+    list_display = ['book_title','book_comment','book_read']
 
 
 # Register your models here.
