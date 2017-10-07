@@ -5,7 +5,7 @@ class NewsInfoAdmin(admin.ModelAdmin):
     list_display = ['id','news_title','news_content','news_category'] #显示的内容
     list_filter = ['news_title']#过滤字段
     search_fields = ['news_content']#搜索字段 搜索会出现在左上侧
-    list_per_page = 3 #分页
+    list_per_page = 10 #分页
 
 
 class NewsCategoryAdmin(admin.ModelAdmin):
