@@ -126,5 +126,52 @@ import random
 # print(hero_list)
 
 # exclude　按照条件反方向查找
-hero_list = HeroInfo.objects.exclude(pk__gt=3)
-print(hero_list)
+# hero_list = HeroInfo.objects.exclude(pk__gt=3)
+# print(hero_list)
+
+# get
+# try:
+#     book = BookInfo.objects.get(pk=20)
+# except BookInfo.DoesNotExist:
+#     book = BookInfo()
+#     book.id = 20
+#     book.book_read = random.randint(1, 100)
+#     book.book_comment = random.randint(1, 100)
+#     book.book_title = '大话西游'
+#     book.save()
+
+
+# F对象
+# book_list = BookInfo.objects.filter(book_comment__gte=models.F('book_read'))
+# print(book_list) # 查询评论数比阅读量大的书
+#
+#
+# book_list = BookInfo.objects.filter(book_comment__gte=models.F('book_read')*2)
+# print(book_list) # 查询评论数大于阅读量两倍书
+
+# Q对象
+# book_list = BookInfo.objects.filter(book_read__gt=20).filter(pk__gt=2)
+# print(book_list)  #查询阅读量大于20且主键大于2的书
+
+# Ｑ对象支持　&(与) |(或)
+# book_list = BookInfo.objects.filter( models.Q(book_read__gt=20) & models.Q(pk__gt=2) )
+# print(book_list) #查询图书的阅读量大于20并且id大于2的书
+#
+# book_list = BookInfo.objects.filter( models.Q(book_read__gt=20) | models.Q(pk__gt=2) )
+# print(book_list) #查询图书的阅读量大于20或者id大于2的书
+
+# 通过模型类实现关联查询
+# book_list = BookInfo.objects.filter(heroinfo__hero_desc__contains='八')
+# print(book_list)  # 查询英雄的描述中含有八的图书记录
+
+# book_list = HeroInfo.objects.filter(hero_book__book_title='天龙八部')
+# print(book_list) #查询属于天龙八部这本书的所有英雄
+
+
+# 结果集排序
+# hero_list = HeroInfo.objects.order_by('-id')
+# print(hero_list)  # 按照ID倒序排列结果
+
+
+# hero_list = HeroInfo.objects.filter(id__gt=2).order_by('-id')
+# print(hero_list)  #设置筛选条件的倒序
