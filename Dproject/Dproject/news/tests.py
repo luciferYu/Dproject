@@ -95,5 +95,36 @@ import random
 
 # book = BookInfo.objects.get(pk=3)  # 获得一本书
 # book.delete()  # 级联删除
+#
+#以下进行查询集测试
+#查询方法如下
+# (Dproject) C:\Users\lucifer\Desktop\learnpython\python_advan\stage04\作业\day01\Dproject>Scripts\python.exe Dproject\manage.py test news
+# <QuerySet [<HeroInfo: 郭靖>, <HeroInfo: 乔峰>]>
+# Creating test database for alias 'default'...
+# System check identified no issues (0 silenced).
 
 
+
+#exact
+# hero_list = HeroInfo.objects.filter(hero_sex__exact=True)  # 查询所有性别为男性的对象
+# print(hero_list)
+
+#contains
+# hero_list = HeroInfo.objects.filter(hero_desc__contains='八') #查询描述中带有8的英雄
+# print(hero_list)
+
+#startswith endswith
+# hero_list = HeroInfo.objects.filter(hero_desc__startswith='六')  # 查询以六开头的英雄描述
+# print([ hero.hero_desc for hero in hero_list])
+
+#in
+# hero_list = HeroInfo.objects.filter(pk__in=[1,3,5])
+# print(hero_list)
+
+# gt gte lt lte
+# hero_list = HeroInfo.objects.filter(pk__gt=3)
+# print(hero_list)
+
+# exclude　按照条件反方向查找
+hero_list = HeroInfo.objects.exclude(pk__gt=3)
+print(hero_list)
