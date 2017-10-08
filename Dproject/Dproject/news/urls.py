@@ -6,7 +6,7 @@ from .views import *
 
 urlpatterns = [
     url(r'index.html$',index,name='index'),#将 访问news/index/ 与 index函数做绑定
-    url(r'news_detail/(\d+).html',news_detail)
+    url(r'detail_(\d+).html',news_detail,name='detail')
 ]
 
 

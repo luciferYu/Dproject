@@ -45,7 +45,7 @@
 <body>
 <ul>
     {% for cag in cags %}
-      <li><h1><a href="/news/news_detail/{{ cag.id }}.html">{{ cag.cag_name }}</a></h1></li>
+      <li><h1><a href="{% url 'detail' cag.id %}">{{ cag.cag_name }}</a></h1></li>
     {% endfor %}
 </ul>
 </body>
