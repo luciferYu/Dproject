@@ -5,7 +5,7 @@ from django.conf.urls import url
 from .views import *
 
 urlpatterns = [
-    url(r'index/$',index),#将 访问news/index/ 与 index函数做绑定
+    url(r'index.html$',index,name='index'),#将 访问news/index/ 与 index函数做绑定
     url(r'news_detail/(\d+).html',news_detail)
 ]
 

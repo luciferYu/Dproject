@@ -43,7 +43,8 @@
   </script>
 </head>
 <body>
-  <h2><a href="../index/">返回上页</a></h2>
+  <!--<h2><a href="../index/">返回上页</a></h2>-->
+  <h2><a href="{% url 'index' %}">返回上页</a></h2>
   <ul>
     {% for news in detail_news %}
     <li>
