@@ -34,6 +34,33 @@ class BookInfo(BaseModel):
     def __str__(self):
         return self.book_title
 
+class HeroInfoManager(models.Manager):
+    '''定义一个新的管理器类'''
+    def all(self):
+        '''
+        定义一个新的all方法，将父类all获取到的结果过滤掉逻辑删除的部分
+        :return: 返回过滤完成的结果
+        '''
+        result = super().all().filter(hero_delete=False)
+        return result
+
+    def remove_hero(self,heroname):
+        '''
+        定义一个逻辑删除英雄的方法
+        :param heroname: 传入英雄的方法
+        :return:
+        '''
+        #尝试获取英雄列表
+        heros = HeroInfo.objects.filter( models.Q(hero_delete=False) & models.Q(hero_name=heroname))
+        if heros:
+            for hero in heros:
+                hero.hero_delete = True
+                hero.save()
+                print('删除成功')
+                return True
+        else:
+            print('删除失败2')
+            return False
 
 class HeroInfo(BaseModel):
     '''英雄类'''
@@ -43,5 +70,7 @@ class HeroInfo(BaseModel):
     hero_delete = models.BooleanField(default=False)  # 英雄是否被逻辑删除
     hero_book = models.ForeignKey('BookInfo')  # 英雄属于的书
     #hero_hometown = models.CharField(max_length=70,default='金庸小说') # 英雄也要问出处
+    objects = HeroInfoManager()  # 自定义管理器
+
     def __str__(self):
         return self.hero_name

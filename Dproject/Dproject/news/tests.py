@@ -175,3 +175,25 @@ import random
 
 # hero_list = HeroInfo.objects.filter(id__gt=2).order_by('-id')
 # print(hero_list)  #设置筛选条件的倒序
+
+
+#测试自定义管理器
+# hero_list = HeroInfo.objects.all()
+# print(hero_list)
+# try:
+#     guojing = HeroInfo.objects.get(hero_name='郭靖')
+#     guojing.hero_delete = True
+#     guojing.save()
+# except:
+#     print('删除失败')
+#hero_list = HeroInfo.objects.all()
+# print()
+#print(hero_list)
+
+# hero_list = HeroInfo.objects.all()
+# print(hero_list)
+# #HeroInfo.objects.remove_hero('黄蓉')
+# HeroInfo.objects.remove_hero('无名氏为了触发失败')
+# print()
+# hero_list = HeroInfo.objects.all()
+# print(hero_list)
