@@ -197,3 +197,6 @@ import random
 # print()
 # hero_list = HeroInfo.objects.all()
 # print(hero_list)
+
+areas_list = areas.objects.all()
+print(areas_list)

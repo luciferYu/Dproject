@@ -74,3 +74,29 @@ class HeroInfo(BaseModel):
 
     def __str__(self):
         return self.hero_name
+
+class areas(models.Model):
+    aid = models.IntegerField(primary_key=True)
+    atitle = models.CharField(max_length=20)
+    pid = models.IntegerField(null=True)
+
+    def __str__(self):
+        '''
+        定义一个显示的方法
+        :return:
+        '''
+        return self.atitle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
