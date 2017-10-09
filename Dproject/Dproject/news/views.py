@@ -13,3 +13,13 @@ def news_detail(request,cag_id):#用来处理新闻详细页的函数
     detail_news = NewsInfo.objects.filter(news_category_id=cag_id) # 获取多条网页新闻
     title = NewsCategory.objects.get(id=cag_id).cag_name #从多条详细新闻获取这个新闻的类型，设置到网页标头
     return render(request,'news.html',locals())
+
+def areas_query(request,aid):
+    if aid:
+        print('aid:' + str(aid))
+        areas_list = areas.objects.filter(pid=aid)
+    else:
+        print('aid:' + str(aid))
+        #areas_list = areas.objects.filter(pid=None)
+        areas_list = areas.objects.filter(pid=None)
+    return render(request,'areas.html',locals())

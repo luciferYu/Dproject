@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><!--设置字符集-->
+  <!--设置视口，用于手机浏览-->
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+  <!--兼容IE浏览器-->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--引入reset.css 清除元素默认效果-->
+  <!--<link rel="stylesheet" href="./css/reset.css"> -->
+  <!--引入bootstrap css-->
+  <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+  <!--引入jquery-->
+  <!--<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>-->
+  <!--<script type="text/javascript"  src="js/jquery-ui.min.js"></script>-->
+  <!--引入为了兼容低版本ie的json-->
+  <!--<script type="text/javascript" src="js/json2.js"></script>-->
+  <!--引入jquery操作cookie-->
+  <!--<script type="text/javascript" src="js/jquery.cookie.js"></script>-->
+  <!--引入jquery鼠标滚动支持-->
+  <!--<script type="text/javascript" src="js/jquery.mousewheel.js"></script>-->
+  
+  <!--添加动画支持颜色-->
+  <!--<script type="text/javascript" src="js/jquery.animate-colors-min.js"></script>-->
+  
+  <!--引入bootstrap相关-->
+    <!--引入bootstrap js-->
+  <!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+  
+  <!--引入heightchart-->
+  <!--<script type="text/javascript" src="js/heightchart/highcharts.js"></script>-->
+  <!--<script type="text/javascript" src="js/heightchart/modules/exporting.js"></script>-->
+  <!-- <script type="text/javascript" src="js/yourjs.js"></script> -->
+  
+  <!--网页的标题-->
+  <title>Title</title>
+  <style></style><!--页内的css-->
+  <!--<script>-->
+          <!--//页内的js-->
+          <!--$(function () {  //js ready-->
+          <!---->
+          <!--}); -->
+  <!--</script>-->
+</head>
+<body>
+    {% for area in areas_list %}
+      <h3 style="margin:5px 5px 5px 5px;"><a href="{% url 'areas_query' aid=area.aid %}"> {{ area.atitle }} </a></h3>
+    {% endfor %}
+</body>
+</html>

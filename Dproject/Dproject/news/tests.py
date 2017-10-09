@@ -198,5 +198,32 @@ import random
 # hero_list = HeroInfo.objects.all()
 # print(hero_list)
 
-areas_list = areas.objects.all()
+# areas_list = areas.objects.all() #查询所有地区
+# print(areas_list)
+
+# areas_list = areas.objects.filter(pid=None) #查询最高级别行政区
+# print(areas_list)
+
+
+
+areas_list = areas.objects.filter(pid=130000)
 print(areas_list)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
