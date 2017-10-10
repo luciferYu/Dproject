@@ -17,6 +17,8 @@ def news_detail(request,cag_id):#用来处理新闻详细页的函数
 def areas_query(request,**kwargs):  # 用来处理显示城市的网页
     if kwargs['aid']:
         areas_list = areas.objects.filter(pid=kwargs['aid'])  # 如果存在父城市的编号，则获取所有该父城市的子城市
+        ptitle = areas.objects.get(aid=kwargs['aid']).atitle
     else:
         areas_list = areas.objects.filter(pid=None) # 如果没有父城市穿过来，则说明访问的是主页
+        ptitle = '首页'
     return render(request,'areas.html',locals())

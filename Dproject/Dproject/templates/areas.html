@@ -7,7 +7,7 @@
   <!--兼容IE浏览器-->
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!--网页的标题-->
-  <title>Title</title>
+  <title>{{ ptitle }}</title>
   <style>
     .backindex{
       float:right;
@@ -21,6 +21,8 @@
       <h2 class="backindex"><a href="/news/areas/">返回首页</a></h2>
     {% for area in areas_list %}
       <h3 class="city"><a href="{% url 'areas_query' aid=area.aid %}"> {{ area.atitle }} </a></h3>
-    {% endfor %}
+    {% empty %}
+      <h3> 已经到底了 </h3>
+      {% endfor %}
 </body>
 </html>
