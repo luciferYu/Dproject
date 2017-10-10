@@ -14,9 +14,9 @@ def news_detail(request,cag_id):#用来处理新闻详细页的函数
     title = NewsCategory.objects.get(id=cag_id).cag_name #从多条详细新闻获取这个新闻的类型，设置到网页标头
     return render(request,'news.html',locals())
 
-def areas_query(request,aid):  # 用来处理显示城市的网页
-    if aid:
-        areas_list = areas.objects.filter(pid=aid)  # 如果存在父城市的编号，则获取所有该父城市的子城市
+def areas_query(request,**kwargs):  # 用来处理显示城市的网页
+    if kwargs['aid']:
+        areas_list = areas.objects.filter(pid=kwargs['aid'])  # 如果存在父城市的编号，则获取所有该父城市的子城市
     else:
         areas_list = areas.objects.filter(pid=None) # 如果没有父城市穿过来，则说明访问的是主页
     return render(request,'areas.html',locals())
