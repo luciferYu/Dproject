@@ -52,3 +52,26 @@ def ajax(request):  # 处理简易计算机传来的ajax请求
     elif method == '4':  # 除法
         result = num1 / num2
     return JsonResponse({'result':result})  # 返回json响应
+
+def post(request):
+    return render(request,'mypost.html')
+
+def posted(request):
+    if request.method == 'POST':
+        name = request.POST['username']
+        content = '姓名:' + name + '  '
+        if request.POST['sex'] == '0':
+            content += '性别：男 '
+        elif request.POST['sex'] == '1':
+            content += '性别：女 '
+        hobby_list = request.POST.getlist('hobby')
+        if hobby_list:
+            content += '爱好：'
+        for hobby in hobby_list:
+            if hobby == '1':
+                content += ' 胸口碎大石'
+            if hobby == '2':
+                content += ' 脚踩电灯泡'
+            if hobby == '3':
+                content += ' 口吐火'
+    return render(request, 'mypost.html',locals())
