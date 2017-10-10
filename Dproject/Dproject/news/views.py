@@ -22,3 +22,15 @@ def areas_query(request,**kwargs):  # 用来处理显示城市的网页
         areas_list = areas.objects.filter(pid=None) # 如果没有父城市穿过来，则说明访问的是主页
         ptitle = '首页'
     return render(request,'areas.html',locals())
+
+
+def hero_all(request):
+    '''显示所有逻辑未删除的英雄'''
+    hero_list = HeroInfo.objects.logical_all()
+    return render(request,'hero_all.html',locals())
+
+def hero_delete(request):
+    '''逻辑删除某个用户'''
+    hero_id = request.GET.get('id')
+    HeroInfo.objects.remove_hero(hero_id)
+    return render(request,'hero_delete.html')

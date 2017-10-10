@@ -36,7 +36,7 @@ class BookInfo(BaseModel):
 
 class HeroInfoManager(models.Manager):
     '''定义一个新的管理器类'''
-    def all(self):
+    def logical_all(self):
         '''
         定义一个新的all方法，将父类all获取到的结果过滤掉逻辑删除的部分
         :return: 返回过滤完成的结果
@@ -44,14 +44,14 @@ class HeroInfoManager(models.Manager):
         result = super().all().filter(hero_delete=False)
         return result
 
-    def remove_hero(self,heroname):
+    def remove_hero(self,id):
         '''
         定义一个逻辑删除英雄的方法
         :param heroname: 传入英雄的方法
         :return:
         '''
         #尝试获取英雄列表
-        heros = HeroInfo.objects.filter( models.Q(hero_delete=False) & models.Q(hero_name=heroname))
+        heros = HeroInfo.objects.filter( models.Q(hero_delete=False) & models.Q(id=id))
         if heros:
             for hero in heros:
                 hero.hero_delete = True
@@ -59,7 +59,7 @@ class HeroInfoManager(models.Manager):
                 print('删除成功')
                 return True
         else:
-            print('删除失败2')
+            print('删除失败')
             return False
 
 class HeroInfo(BaseModel):
