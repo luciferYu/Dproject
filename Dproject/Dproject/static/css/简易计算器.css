@@ -1,0 +1,57 @@
+.frame{
+    width:500px;
+    height: 35px;
+    border: 2px solid cadetblue;
+    margin:210px auto;
+    line-height: 35px;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+#num1{
+    width:130px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 30px;
+    color: gold;
+    outline: none;
+
+}
+
+#num2{
+    width:130px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 30px;
+    color: gold;
+    outline: none;
+}
+
+#result{
+    width:140px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 30px;
+      color: red;
+    outline: none;
+}
+
+#method{
+    width:50px;
+    height: 35px;
+    font-size: 30px;
+    line-height: 35px;
+      background-color: #31708f;
+    color: whitesmoke;
+    border-radius: 5px;
+}
+
+#btn1{
+    width:50px;
+    height: 35px;
+    font-size: 30px;
+    line-height: 35px;
+    background-color: #31708f;
+    color: whitesmoke;
+    border-radius: 5px;
+}

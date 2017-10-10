@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse # 导入http响应类 用做视图的返回对象
+from django.http import HttpResponse,JsonResponse # 导入http响应类 用做视图的返回对象
 from django.template import loader
 from .models import *
 # Create your views here.
@@ -34,3 +34,21 @@ def hero_delete(request):
     hero_id = request.GET.get('id')
     HeroInfo.objects.remove_hero(hero_id)
     return render(request,'hero_delete.html')
+
+def calc(request):  # 返回简易计算机页面
+    return render(request,'简易计算器.html')
+
+def ajax(request):  # 处理简易计算机传来的ajax请求
+    num1 = int(request.GET.get('num1',''))
+    num2 = int(request.GET.get('num2',''))
+    method = request.GET.get('method','')
+    result = 0
+    if method == '1':  # 加法
+        result = num1 + num2
+    elif method == '2':  # 减法
+        result = num1 - num2
+    elif method == '3':  # 乘法
+        result = num1 * num2
+    elif method == '4':  # 除法
+        result = num1 / num2
+    return JsonResponse({'result':result})  # 返回json响应

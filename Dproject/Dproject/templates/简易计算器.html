@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--引入jquery-->
+    <script type="text/javascript" src="../../static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-ui.min.js"></script>
+    <!--引入为了兼容低版本ie的json-->
+    <script type="text/javascript" src="../../static/js/json2.js"></script>
+    <!--引入jquery操作cookie-->
+    <script type="text/javascript" src="../../static/js/jquery.cookie.js"></script>
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/css/简易计算器.css">
+    <script>
+        $(
+            function () {  //js ready
+                $('#btn1').click(
+                    function () {
+                        var num1 = $('#num1').val();
+                        var num2 = $('#num2').val();
+                        var method = $('#method').val();
+                        $.ajax(
+                            {
+                                url: 'ajax/result.json',
+                                type: 'GET',
+                                dataType: 'json',
+                                data: {
+                                    'num1': num1,
+                                    'num2': num2,
+                                    'method': method
+                                },
+                                success: function (data) {
+                                    console.log(data.result);
+                                    $('#result').val(data.result)
+                                },
+                                error: function () {
+                                    $('#result').val('出错啦！！> _ < ')
+                                }
+                            }
+                        )
+                    }
+                )
+
+            }
+        )
+    </script>
+</head>
+<body>
+<div class="frame">
+    <input class="fl" id="num1" name="num1" type="text">
+    <select class="fl" id="method" name="method">
+        <option value="1">+</option>
+        <option value="2">-</option>
+        <option value="3">×</option>
+        <option value="4">÷</option>
+    </select>
+    <input class="fl" id="num2" name="num2" type="text">
+    <input class="fl" id="btn1" type="button" value="=">
+    <input class="fl" id="result" type="text"></div>
+</body>
+</html>
