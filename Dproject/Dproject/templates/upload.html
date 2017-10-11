@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{# 填充模板 body #}
+{% block body %}
+<div>
+    <form action="../upload_handle/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="pic">
+        请输入图片描述：<input type="text" name="pic_desc"><br>
+        <input type="submit" value="确定上传">
+    </form>
+</div>
+
+{% endblock body %}

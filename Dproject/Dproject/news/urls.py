@@ -13,7 +13,9 @@ urlpatterns = [
     url(r'^calc/$',calc),#计算器页面
     url(r'ajax/result.json$',ajax), #计算器ajax请求页面
     url(r'^post/$',post), # 提交前
-    url(r'^posted/$',posted) # 提交后
+    url(r'^posted/$',posted), # 提交后
+    url(r'^upload/$',upload), #上传文件
+    url(r'^upload_handle/',upload_handle)
 ]
 
 

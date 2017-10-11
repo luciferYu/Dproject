@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse # 导入http响应类 用做视图的返回对象
 from django.template import loader
 from .models import *
+import hashlib
+
+
 # Create your views here.
 def index(request): #最简易视图
     #return HttpResponse('hello django!!')
@@ -53,10 +56,10 @@ def ajax(request):  # 处理简易计算机传来的ajax请求
         result = num1 / num2
     return JsonResponse({'result':result})  # 返回json响应
 
-def post(request):
+def post(request):  #制作了一个post表单的视图
     return render(request,'mypost.html')
 
-def posted(request):
+def posted(request):  #制作了提交表单的页面
     if request.method == 'POST':
         name = request.POST['username']
         content = '姓名:' + name + '  '
@@ -75,3 +78,48 @@ def posted(request):
             if hobby == '3':
                 content += ' 口吐火'
     return render(request, 'mypost.html',locals())
+
+
+def upload(request):  #显示上传页面 url http://127.0.0.1:8000/news/upload/
+    title = '上传文件'  #渲染父模板的title
+    return render(request,'upload.html',locals())
+
+def upload_handle(request): #处理上传文件函数
+    if request.method == 'POST':
+        pic = request.FILES['pic']  # 获取图片
+        pic_desc = request.POST['pic_desc']  # 获取图片描述
+        if pic: # 如果有图片上传
+            mp = MyPic() # 生成一个图片对象
+            mp.pic_name = pic.name # 设置图片对象的路径
+            mp.pic_desc=pic_desc  # 设置图片对象的名称
+            mp.save()  # 保存到数据库中
+            from django.conf import settings
+            # 获得图片完整路径
+            pic_path = settings.MEDIA_ROOT + str(mp.pic_name)
+            with open(pic_path,'wb') as f:
+                for data in pic.chunks():
+                    f.write(data)
+
+
+    return HttpResponse(pic_path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

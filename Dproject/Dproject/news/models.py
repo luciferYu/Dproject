@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class NewsCategory(models.Model):
     '''新闻分类表'''
@@ -88,7 +89,9 @@ class areas(models.Model):
         return self.atitle
 
 
-
+class MyPic(models.Model): # 定义一个图片模型
+    pic_desc = models.CharField(max_length=200)  # 图片描述
+    pic_name = models.ImageField(upload_to='images') # 图片名字
 
 
 
