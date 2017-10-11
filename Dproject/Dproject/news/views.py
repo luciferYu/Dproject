@@ -124,3 +124,8 @@ def upload_handle(request):  # 处理上传文件函数
 
 def show_vericode(request):
     return verification_code(request)
+
+def dispic(request):
+    pics = MyPic.objects.all()
+    title = '图片显示页面'
+    return render(request,'dispic.html',locals())

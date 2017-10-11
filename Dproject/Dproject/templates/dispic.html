@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{# 填充css #}
+{% block style %}
+<style>
+    .pic{
+        width:200px;
+        height:250px;
+        border:2px solid grey;
+        margin:10px;
+        position: relative;
+        float: left;
+    }
+
+    .pic img{
+        width:180px;
+        height: 200px;
+        position: absolute;
+        left:8px;
+        top:8px;
+    }
+    .pic p{
+        width:180px;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        color: grey;
+        font-size: 10px;
+        position: absolute;
+        top:202px;
+        left:10px;
+        font-weight: bolder;
+    }
+</style>
+{% endblock style%}
+
+{# 填充模板 body #}
+{% block body %}
+{% load staticfiles %}
+{% load custom_filters %}
+{% for pic in pics %}
+<div class="pic">
+    <img src="../../{{ pic.pic_name|fix_img_url }}" alt="{{ pic.pic_desc }}">
+    <p>{{ pic.pic_desc }}</p>
+</div>
+{% endfor %}
+{% endblock body %}

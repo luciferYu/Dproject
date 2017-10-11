@@ -34,7 +34,10 @@
   
   <!--网页的标题-->
   <title>{{ title }}</title>
-  <style></style><!--页内的css-->
+  <style>
+  </style><!--页内的css-->
+  {% block style %}
+  {% endblock style%}
   <script>
           //页内的js
           $(function () {  //js ready
