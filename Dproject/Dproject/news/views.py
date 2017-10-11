@@ -3,7 +3,10 @@ from django.http import HttpResponse,JsonResponse # 导入http响应类 用做�
 from django.template import loader
 from .models import *
 import hashlib
+import os
+from .vericode import verification_code,generate_random_string
 
+vcode = None
 
 # Create your views here.
 def index(request): #最简易视图
@@ -85,25 +88,35 @@ def upload(request):  #显示上传页面 url http://127.0.0.1:8000/news/upload/
     return render(request,'upload.html',locals())
 
 def upload_handle(request): #处理上传文件函数
-    if request.method == 'POST':
-        pic = request.FILES['pic']  # 获取图片
-        pic_desc = request.POST['pic_desc']  # 获取图片描述
-        if pic: # 如果有图片上传
-            mp = MyPic() # 生成一个图片对象
-            mp.pic_name = pic.name # 设置图片对象的路径
-            mp.pic_desc=pic_desc  # 设置图片对象的名称
-            mp.save()  # 保存到数据库中
-            from django.conf import settings
-            # 获得图片完整路径
-            pic_path = settings.MEDIA_ROOT + str(mp.pic_name)
-            with open(pic_path,'wb') as f:
-                for data in pic.chunks():
-                    f.write(data)
+    print('session' + request.session['verify_code'])
+    print('post' + request.POST.get('vericode'))
+    if request.POST.get('vericode') == request.session['verify_code']:
+        if request.method == 'POST':
+            pic = request.FILES['pic']  # 获取图片
+            pic_desc = request.POST['pic_desc']  # 获取图片描述
+            prename,postname = os.path.splitext(str(pic.name))
+            pic_filename = prename + pic_desc
+            sha1 = hashlib.sha1()
+            sha1.update(pic_filename.encode('utf-8'))
+            pic_filename = sha1.hexdigest()+ postname
+            if pic: # 如果有图片上传
+                mp = MyPic() # 生成一个图片对象
+                mp.pic_name = pic_filename # 设置图片对象的路径
+                mp.pic_desc=pic_desc  # 设置图片对象的名称
+                mp.save()  # 保存到数据库中
+                from django.conf import settings
+                #获得图片完整路径
+                pic_path = settings.MEDIA_ROOT + pic_filename
+                with open(pic_path,'wb') as f:
+                    for data in pic.chunks():
+                        f.write(data)
+        return HttpResponse(pic_filename + ' 文件上传成功！！')
+    else:
+        return HttpResponse('验证码错误')
 
+def show_vericode(request):
 
-    return HttpResponse(pic_path)
-
-
+    return verification_code(request)
 
 
 

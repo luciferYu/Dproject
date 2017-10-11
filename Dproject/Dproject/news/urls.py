@@ -14,8 +14,9 @@ urlpatterns = [
     url(r'ajax/result.json$',ajax), #计算器ajax请求页面
     url(r'^post/$',post), # 提交前
     url(r'^posted/$',posted), # 提交后
-    url(r'^upload/$',upload), #上传文件
-    url(r'^upload_handle/',upload_handle)
+    url(r'^upload/$',upload), #上传文件页面
+    url(r'^upload_handle/',upload_handle), #处理上传文件
+    url(r'^vericode/$',show_vericode) #图片验证码
 ]
 
 
