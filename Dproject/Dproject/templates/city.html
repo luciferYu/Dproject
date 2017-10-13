@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{# 填充模板 body #}
+{% block body %}
+<div>
+    <select name="" id="c1" >
+        <option value="-1">请选择</option>
+        {% for city in leveltop %}
+        <option value={{ city.aid }}>{{ city.atitle }}</option>
+        {% endfor %}
+    </select>
+    <select name="" id="c2" >
+        <option value="-1">请选择</option>
+    </select>
+    <select name="" id="c3" >
+        <option value="-1">请选择</option>
+    </select>
+</div>
+{% endblock body %}
+
+{% block jquery %}
+<script>
+//页内的js
+$(function () {  //js ready
+        $('#c1').change(
+            function () {
+                $.get('{% url 'cityajax' %}',
+                    {'fcity':$('#c1').val()},
+                function (data) {
+                    fcitys = data.citys;
+                    $('#c2').empty();
+                    $('#c2').append('<option value="-1">请选择</option>');
+                    for(var i=0;i<fcitys.length;++i){
+                        $('#c2').append(
+                            '<option value="' + fcitys[i].city_code + '">' + fcitys[i].city_name + '</option>'
+                        );
+                    };
+
+                });
+            }
+            );
+
+             $('#c2').change(
+            function () {
+                $.get('{% url 'cityajax' %}',
+                    {'fcity':$('#c2').val()},
+                function (data) {
+                    fcitys = data.citys;
+                    $('#c3').empty();
+                    $('#c3').append('<option value="-1">请选择</option>');
+                    for(var i=0;i<fcitys.length;++i){
+                        $('#c3').append(
+                            '<option value="' + fcitys[i].city_code + '">' + fcitys[i].city_name + '</option>'
+                        );
+                    };
+
+                });
+            }
+            );
+
+          });
+</script>
+{% endblock jquery %}
+

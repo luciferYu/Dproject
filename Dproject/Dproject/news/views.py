@@ -155,3 +155,12 @@ def dispic(request):
     pics = MyPic.objects.all()
     title = '图片显示页面'
     return render(request, 'dispic.html', locals())
+
+def city(request):
+    leveltop = areas.objects.filter(pid=None)
+    return render(request,'city.html',locals())
+
+def cityajax(request):
+    ajaxcitys = areas.objects.filter(pid=request.GET['fcity'])
+    citys = [ dict({'city_code':city.aid,'city_name':city.atitle}) for city in ajaxcitys ]
+    return JsonResponse({'citys':citys})
