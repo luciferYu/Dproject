@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse  # 导入http响应类 用做视图的返回对象
 from django.template import loader
 from .models import *
-import hashlib
+import hashlib  # 存图片时对文件名进行哈希
 import os
-from .vericode import verification_code
+from .vericode import verification_code  # 验证码函数
+from django.core.paginator import *  # 导入分页
 
 
 # Create your views here.
@@ -28,6 +29,30 @@ def areas_query(request, **kwargs):  # 用来处理显示城市的网页
     else:
         areas_list = areas.objects.filter(pid=None)  # 如果没有父城市穿过来，则说明访问的是主页
         ptitle = '首页'
+    paginator = Paginator(areas_list, 5, 0)  # 使用分页
+    page_now = request.GET.get('page_now', None)  # 获取当前页码
+    try:
+        page_data_list = paginator.page(page_now)  # 尝试获取当前页码
+    except PageNotAnInteger:
+        page_now = 1
+        page_data_list = paginator.page(page_now)  # 如果传来页面不是数字，设到第一页
+    except EmptyPage:  # 如果是空页面处理
+        if int(page_now) <= 0:
+            page_now = 1
+        else:
+            page_now = paginator.num_pages
+        page_data_list = paginator.page(page_now)
+    page_index = paginator.page_range  # 分页页面列表
+
+    if page_data_list.has_previous():  # 上一页
+        prev = page_data_list.previous_page_number()
+    else:
+        prev = 1
+    if page_data_list.has_next():  # 下一页
+        next = page_data_list.next_page_number()
+    else:
+        next = paginator.num_pages
+
     return render(request, 'areas.html', locals())
 
 
@@ -125,7 +150,8 @@ def upload_handle(request):  # 处理上传文件函数
 def show_vericode(request):
     return verification_code(request)
 
+
 def dispic(request):
     pics = MyPic.objects.all()
     title = '图片显示页面'
-    return render(request,'dispic.html',locals())
+    return render(request, 'dispic.html', locals())

@@ -19,10 +19,16 @@
 </head>
 <body>
       <h2 class="backindex"><a href="/news/areas/">返回首页</a></h2>
-    {% for area in areas_list %}
-      <h3 class="city"><a href="{% url 'areas_query' aid=area.aid %}"> {{ area.atitle }} </a></h3>
+    {% for area in page_data_list %}
+      <h3 class="city"><a href="{% url 'areas_query' aid=area.aid %}"> {{ area.atitle }} </a></h3><!--循环内容-->
     {% empty %}
       <h3> 已经到底了 </h3>
       {% endfor %}
+      <hr>
+      <a href="?page_now={{ prev }}">上一页</a>  <!--分页上一页-->
+    {% for index in page_index %}
+      <a href="?page_now={{index}}">{{ index }}</a> <!--循环分页-->
+    {% endfor %}
+      <a href="?page_now={{ next }}">下一页</a> <!--分页下一页-->
 </body>
 </html>
