@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse  # 导入http响应类 用做视图的返回对象
+from django.http import HttpResponse, JsonResponse,HttpResponseRedirect  # 导入http响应类 用做视图的返回对象
 from django.template import loader
 from .models import *
 import hashlib  # 存图片时对文件名进行哈希
@@ -164,3 +164,17 @@ def cityajax(request):
     ajaxcitys = areas.objects.filter(pid=request.GET['fcity'])
     citys = [ dict({'city_code':city.aid,'city_name':city.atitle}) for city in ajaxcitys ]
     return JsonResponse({'citys':citys})
+
+def richtext(request):  #编辑富文本页面
+    return render(request,'richtext.html')
+
+def add_news(request):  #处理提交的富文本
+    title = request.POST.get('title',None)
+    content = request.POST.get('content',None)
+    news = News(news_title=title,news_content=content)
+    news.save()
+    return HttpResponseRedirect('../richtext_show/')
+
+def richtext_show(request):  # 显示富文本
+    news_list = News.objects.all()
+    return render(request,'richtext_show.html',{'data':news_list})

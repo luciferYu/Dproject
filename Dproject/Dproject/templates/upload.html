@@ -4,7 +4,7 @@
 {% block body %}
 <div>
     <form action="../upload_handle/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+        {% csrf_token % }
         <input type="file" name="pic">
         请输入图片描述：<input type="text" name="pic_desc"><br>
         <img src="../vericode/" alt="">

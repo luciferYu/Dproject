@@ -20,6 +20,9 @@ urlpatterns = [
     url(r'^dispic/$',dispic),#显示图片
     url(r'^city/$',city),
     url(r'^cityajax/$',cityajax,name='cityajax'),
+    url(r'^richtext/$',richtext,name='richtext'),# 编辑富文本
+    url(r'^add_news/$',add_news,name='add_news'),# 添加富文本到数据库
+    url(r'^richtext_show/$',richtext_show),  #显示富文本
 ]
 
 

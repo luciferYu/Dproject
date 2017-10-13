@@ -19,6 +19,10 @@ class HeroInfoAdmin(admin.ModelAdmin):
 class BookInfoAdmin(admin.ModelAdmin):
     list_display = ['book_title','book_comment','book_read']
 
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ['id','news_title','news_content']
+
 
 # Register your models here.
 admin.site.register(NewsInfo,NewsInfoAdmin)#注册新闻分类

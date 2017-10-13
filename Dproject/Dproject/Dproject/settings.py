@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news',  #安装news应用
+    'tinymce', #安装富文本编辑器
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static'),]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static\\images\\')  # 设置图片上传路径
+
+#富文本编辑器配置
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    # 'theme': 'simple',
+    'width': 600,
+    'height': 400,
+    'language': 'zh-CN',
+    'theme_advanced_buttons1': 'bold, italic, underline, strikethrough, justifyleft, justifycenter, justifyright, justifyfull, styleselect, bullist, numlist, outdent, indent, undo,redo, link, unlink, image, cleanup, help, code, table, row_before, row_after, delete_row, separator, rowseparator',
+    'theme_advanced_buttons2': 'col_before, col_after, delete_col, hr, removeformat, sub, sup, formatselect, fontselect, fontsizeselect, forecolor,charmap,visualaid,spacer,cut,copy,paste'
+}

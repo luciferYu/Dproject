@@ -93,6 +93,10 @@ class MyPic(models.Model): # 定义一个图片模型
     pic_desc = models.CharField(max_length=200)  # 图片描述
     pic_name = models.ImageField(upload_to='images') # 图片名字
 
+from tinymce.models import HTMLField  # 第一步 引入富文本的包
+class News(models.Model):
+    news_title = models.CharField(max_length=100)
+    news_content = HTMLField()  # 第二步 创建字段使用富文本
 
 
 

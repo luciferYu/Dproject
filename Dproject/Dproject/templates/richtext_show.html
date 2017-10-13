@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{# 填充模板 body #}
+{% block body %}
+{% for news in data %}
+    <h2>{{news.news_title}}</h2><br>
+    {{news.news_content|safe }}
+<hr>
+{% endfor %}
+{% endblock body %}
+

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{# 填充模板 body #}
+{% block body %}
+<form action="{% url 'add_news' %}" method="post">
+{% csrf_token  |safe %}
+    新闻标题：<input type="text" name="title"><br>
+    新闻内容：<textarea name="content" id=""></textarea><br>
+    <input type="submit" value="提交新闻">
+
+</form>
+{% endblock body %}
+
+{% block jquery %}
+<script type="text/javascript" src="../../static/js/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+            'mode': 'textareas',
+            'theme': 'advanced',
+            'width': 800,
+            'height': 600,
+            'language': 'zh-cn'
+        });
+</script>
+<script>
+    //页内的js
+    $(function () {  //js ready
+
+    });
+</script>
+{% endblock jquery %}
+
+{% block style %}
+
+{% endblock style%}
